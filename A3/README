@@ -1,0 +1,65 @@
+CPSC453 - Assignment 3
+
+NAME:
+UCID Number:
+Tutorial Section:
+
+=== 1. EXECUTION: ===
+
+To compile the program, on the terminal enter the following commands:
+
+	qmake -project QT+=widgets
+	qmake
+	make
+
+To run the program, on the terminal enter the following command:
+
+	./a3
+
+=== 2. PROGRAM USE: ===
+
+Load a texture first
+then load a model
+texture will be applied
+
+if you load a model before texture, you wont be able to load texture due to a bug in QFileDialog and you will be see your model as black
+
+== 3. ALGORITHMS and DESIGN DECISIONS: ===
+
+Face normal calculated via algorithm discussed in class. That is take vertices. amke vector from it. Take cross product of the two vertices. normalize them
+
+Vertex normal calculated via algorithm discussed in class. that is take a vertex, find all adjacent faces. take their normals sum them up and divide it my number of faces.
+
+=== 4. FILES SUBMITTED: ===
+
+main.cpp
+objModel.h
+objModel.cpp
+renderer.h
+renderer.cpp
+window.cpp
+window.h
+textured and per-fragment shader
+checkered.jpg
+a folder with models in it
+README file
+
+=== 5. PROGRAM ASSUMPTIONS: ===
+
+1) load a texture first then load the model.
+
+=== 6. DECLARATION AND IMAGE PERMISSION: ===
+
+<Initial the following:>
+
+_AZ_ I have read the regulations regarding plagarism. I affirm with my initials
+that I have worked on my own solution to this assignment, and the code I am
+submitting is my own.
+
+<Mark with an X if desired. No marks will be deducted either way>
+
+(X) I grant the instructor and/or TAs permission to use images submitted and/or
+   assignment screenshots for future CPSC453 courses along with my name
+
+ 
+

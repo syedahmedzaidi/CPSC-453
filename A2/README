@@ -1,0 +1,89 @@
+CPSC453 - Assignment 2
+
+NAME:  Syed Ahmed Hassan Zaidi
+UCID Number:  10150285
+Tutorial Section:  T04
+
+=== 1. EXECUTION: ===
+
+To compile the program, on the terminal enter the following commands:
+
+	qmake -project QT+=widgets
+	qmake
+	make
+
+To run the program, on the terminal enter the following command:
+
+	./a2
+
+=== 2. PROGRAM USE: ===
+
+1) To quit the application, press Q.
+2) To reset the application to default, press A.
+3) There are 3 modes to switch application to:
+	a. View Interaction Mode
+	b. Model Interaction Mode
+	c. Viewport Mode
+4) To change to Viewport mode press V.
+5) To rotate according to View interaction mode, press O.
+	a. To rotate about x-axis; Press left mouse button and drag the mouse pointer in x-motion.
+	b. To rotate about y-axis; Press middle mouse button and drag the mouse pointer in x-motion.
+	c. To rotate about z-axis; Press right mouse button and drag the mouse pointer in x-motion.
+6) To translate according to View interaction mode, press N.
+	a. To translate about x-axis; Press left mouse button and drag the mouse pointer in x-motion.
+	b. To translate about y-axis; Press middle mouse button and drag the mouse pointer in x-motion.
+	c. To translate about z-axis; Press right mouse button and drag the mouse pointer in x-motion.
+7) Prespective according to View interaction mode, press N.
+	a. Press left mouse button and drag the mouse pointer in x-motion to change the Field of View from 5 to 160.
+	b. To translate near plane along z-axis; Press middle mouse button and drag the mouse pointer in x-motion.
+	c. To translate far plane along z-axis; Press right mouse button and drag the mouse pointer in x-motion.
+8) To Rotate (R), Translate(T), or Scale(S) in Model Interaction Mode. The button requirements are same as they are in View Interaction Mode
+
+
+== 3. ALGORITHMS and DESIGN DECISIONS: ===
+
+Clipping Method: i first clipped to the near plane using simple line clipping method, then to far plane. I then projected and normalized the points and then clipped them to the viewport.
+Algorithm: The algorithm for far and near plane are same as each other. It is that if it line is outside the clipping area, it is not drawn(bool value set to false). If line is inside the clipping area; it is drawn. If the line intersects the clipping area, it is clipped to correct length and drawn again. Clipping to view port is same as far and near plane, only difference is that they have already been projected and normalized thus they are now 2D points.
+
+I also use four matrixs:
+1) matrix_project: all the projection transformation is done to it
+2) matrix_model: applies to model mode and does transformation to unit cube and model gnomon. Only rotation and scaling.
+3) matrix_view: applies to view mode and does transformation to the entire scene and world gnomon. only rotation and translation kept.
+4) matrix_scale: applies to scale mode but since we only want cube to be scale not the gnomon, i made seperate matrix to handle it.
+
+=== 4. FILES SUBMITTED: ===
+
+1) a2.h
+2) algebra.h
+3) draw.h
+4) renderer.h
+5) window.h
+6) a2.cpp
+7) algebra.cpp
+8) draw.cpp
+9) renderer.cpp
+10) window.cpp
+11) main.cpp
+12) README
+
+=== 5. PROGRAM ASSUMPTIONS: ===
+
+To use viewport mode the person has already resized the screen. I havent done resize screen to incorporate the resizing of viewport.
+
+=== 6. DECLARATION AND IMAGE PERMISSION: ===
+
+<Initial the following:>
+
+__ I have read the regulations regarding plagarism. I affirm with my initials
+that I have worked on my own solution to this assignment, and the code I am
+submitting is my own.
+
+<Mark with an X if desired. No marks will be deducted either way>
+
+_X_ I grant the instructor and/or TAs permission to use images submitted and/or
+   assignment screenshots for future CPSC453 courses.
+
+_X_ If permission has been granted above, I would prefer the images to remain 
+   annonymous. <Otherwise credit will be given, as is due>
+
+_X_

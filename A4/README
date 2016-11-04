@@ -1,0 +1,146 @@
+CPSC453 - Assignment 4
+
+NAME: Syed Ahmed Hassan Zaidi
+UCID Number: 10150285
+Tutorial Section: 
+
+=== 1. EXECUTION: ===
+
+To compile the program, on the terminal enter the following commands:
+
+	qmake -project QT+=widgets
+	qmake
+	make
+
+To run the program, on the terminal enter the following command:
+
+	./a4 w h
+
+	where w & h are Width and Height respectively. Make sure to enter an integer value.
+
+=== 2. PROGRAM USE: ===
+
+For example type the following in the command prompt
+
+./a4 640 480
+
+The first argument (640) is the width of the bmp picture.
+The second argument (480) is the height of the bmp picture.
+
+== 3. ALGORITHMS and DESIGN DECISIONS: ===
+ I decided to do everything with Vectors and made my own Vector class consisting of doubles x y z. Each other class that requires a point has Vect within it.
+ This made it much easier for me to deal with the math involved and i did not have to overload functions.
+
+ We define a ray as:	
+	R0 = [x0, y0, z0] 	- origin of ray
+	Rd = [xd, yd, zd]	- direction of ray
+then define a set of points on the ray:
+	R(t) = R0 + Rd * t	with t > 0.0
+
+
+ 1) Ray-Sphere Intersection:
+
+ 	A sphere can be defined by its center and radius with Sc = [xc, yc, zc] So a sphere of radius Sr is:
+
+	S = the set of points[xs, ys, zs], where (xs - xc)2 + (ys - yc)2 + (zs - zc)2 = Sr2
+
+	For ray:
+		X = X0 + Xd * t
+		Y = Y0 + Yd * t
+		Z = Z0 + Zd * t
+
+	Putting X, Y, Z into the sphere equation for Xs, Ys, Zs would yield us:
+
+			(X0 + Xd * t - Xc)2 + (Y0 + Yd * t - Yc)2 + (Z0 + Zd * t - Zc)2 = Sr^2
+
+	Since our Ray direction is normalized, then A = 1.
+	The quadratic solution is as follow:
+
+	t0, t1 = (- B + (B^2 - 4*C)^1/2) / 2 where t0 is for (-) and t1 is for (+)
+
+	If the discriminant is < 0.0 then there is no real root and no intersection. If there is a real root (Disc. > = 0.0) then the smaller positive root is the closest intersection point. So we can just compute t0 and if it is positive, then we are done, else compute t1. The intersection point is:
+
+		Ri = [xi, yi, zi] = [x0 + xd * ti ,  y0 + yd * ti,  z0 + zd * ti]
+
+2) Ray-Triangle Intersection:
+
+	This is a two-step algorithm, first using the plane equation to determine where an intersection exists, and then using the area solving technique to determine if the
+    intersection point is within the triangle.
+
+      The intersection point is found through the equation
+
+         t = ( (p - o) dot n ) / (x dot n);
+
+      If the numerator is zero, or the distance is <0, no intersection is found.
+
+      Once the intersection is found, we calculate the area of intersection by summing the unit vectors between the intersection point, and each of the triangle's three
+      vertices.
+
+         a = |normalized(p - p1) + normalized(p - p2) + normalized(p - p3)|;
+
+      if a > 1, we conclude the intersection point is outside of the triangle, and no result is returned.
+
+      The surface normal of the triangle is found from the cross-product of two of its edges (e.g. (p2-p1) x (p3-p1) )
+
+3) Phong & Shadow: 
+
+	Ericka Harrison's slides
+
+4) Reflection:
+
+	After the surface color of a ray is calculated, a ray reflecting from the surface
+    is created and traced, and its color calculated.  The color of the reflection ray is
+    then added to the surface color of the initial ray.
+
+         tracer := lightColor + tracer(reflectedRay);
+
+      Once a maximum recursion depth is reached, the reflected rays are assumed to be
+      black.
+
+
+<----------------------------------------------------------------------------------->
+
+=== 4. FILES SUBMITTED: ===
+
+Camera (.cpp + .h)
+Color (.cpp + .h)
+Light (.cpp + .h)
+main.cpp
+Object (.cpp + .h)
+Plane (.cpp + .h)
+polyroots (.cpp + .h)
+Ray (.cpp + .h)
+Source (.cpp + .h)
+Sphere (.cpp + .h)
+Triangle (.cpp + .h)
+Vect (.cpp + .h)
+
+=== 5. IMAGES SUBMITTED: ===
+
+<Insert a list of images that have been submitted by the assignment and describe
+what they demonstrate for the assignment>
+
+=== 6. PROGRAM ASSUMPTIONS: ===
+
+The arguments provided to the tracer are in integer form.
+
+=== 7. DECLARATION AND IMAGE PERMISSION: ===
+
+<Initial the following:>
+
+AZ I have read the regulations regarding plagarism. I affirm with my initials
+that I have worked on my own solution to this assignment, and the code I am
+submitting is my own.
+
+<Mark with an X if desired. No marks will be deducted either way>
+
+X I grant the instructor and/or TAs permission to use images submitted and/or
+   assignment screenshots for future CPSC453 courses.
+
+X If permission has been granted above, I would prefer the images to remain 
+   annonymous. <Otherwise credit will be given, as is due>
+
+X I would like to participate in the raytracer competition. <Competition entries will
+   not be annonymous and credited accordingly. Specify which images are for consideration,
+   otherwise all will be considered.> 
+
